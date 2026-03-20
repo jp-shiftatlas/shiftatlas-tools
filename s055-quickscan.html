@@ -1,0 +1,194 @@
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#0F1A12;}
+.qs-wrap{font-family:'DM Sans',sans-serif;background:#0F1A12;max-width:100%;margin:0 auto;padding:96px 32px;color:#fff;-webkit-font-smoothing:antialiased;}
+.qs-in{max-width:780px;margin:0 auto;}
+.qs-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8943E;margin-bottom:16px;}
+.qs-wrap h2{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(32px,5vw,44px);color:#fff;line-height:1.15;margin-bottom:16px;}
+.qs-desc{font-size:17px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:560px;margin-bottom:40px;}
+.qs-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:40px 36px;min-height:380px;}
+.qs-step{display:none;animation:qsFade 0.35s ease;}
+.qs-step.on{display:block;}
+@keyframes qsFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.qs-ico{width:44px;height:44px;background:rgba(184,148,62,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.qs-ico svg{width:22px;height:22px;stroke:#B8943E;}
+.qs-ih{font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#fff;margin-bottom:14px;line-height:1.25;}
+.qs-it{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:520px;margin-bottom:28px;}
+.qs-it strong{color:rgba(255,255,255,0.85);font-weight:600;}
+.qs-ip{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#B8943E;margin-bottom:12px;}
+.qs-sel{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:13px 42px 13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:#fff;cursor:pointer;width:100%;max-width:380px;transition:border-color 0.2s;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.qs-sel:focus{outline:none;border-color:#B8943E;}
+.qs-sel option{background:#0F1A12;color:#fff;}
+.qs-sel.has{border-color:rgba(107,143,113,0.5);}
+.qs-oth{margin-top:10px;max-width:380px;overflow:hidden;max-height:0;opacity:0;transition:max-height 0.3s ease,opacity 0.3s ease;}
+.qs-oth.vis{max-height:56px;opacity:1;}
+.qs-oth input{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:14px;color:#fff;width:100%;transition:border-color 0.2s;}
+.qs-oth input::placeholder{color:rgba(255,255,255,0.3);}
+.qs-oth input:focus{outline:none;border-color:#B8943E;}
+.qs-nav{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);}
+.qs-bk{display:inline-flex;align-items:center;gap:7px;background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:11px 18px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.qs-bk:hover{border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);}
+.qs-bk svg{width:14px;height:14px;}
+.qs-bk.hid{visibility:hidden;}
+.qs-nx{display:inline-flex;align-items:center;gap:7px;background:#B8943E;color:#0F1A12;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:11px 22px;border-radius:6px;border:none;cursor:pointer;transition:all 0.2s;opacity:0.4;pointer-events:none;}
+.qs-nx.go{opacity:1;pointer-events:auto;}
+.qs-nx.go:hover{background:#C9A44A;transform:translateY(-1px);}
+.qs-nx svg{width:14px;height:14px;}
+.qs-pb{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.qs-pbr{flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.qs-pbf{height:100%;background:#B8943E;border-radius:3px;transition:width 0.4s ease;}
+.qs-pbt{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:1px;white-space:nowrap;}
+.qs-dim{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6B8F71;margin-bottom:10px;}
+.qs-qt{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(20px,3.5vw,26px);color:#fff;line-height:1.3;margin-bottom:28px;max-width:600px;}
+.qs-opts{display:flex;flex-direction:column;gap:10px;}
+.qs-opt{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;cursor:pointer;transition:all 0.2s;user-select:none;}
+.qs-opt:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);}
+.qs-opt.sel{background:rgba(107,143,113,0.12);border-color:rgba(107,143,113,0.4);}
+.qs-rad{flex-shrink:0;width:20px;height:20px;border:2px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all 0.2s;}
+.qs-opt.sel .qs-rad{border-color:#6B8F71;background:#3D6B47;}
+.qs-dot{width:8px;height:8px;border-radius:50%;background:#fff;opacity:0;transition:opacity 0.15s;}
+.qs-opt.sel .qs-dot{opacity:1;}
+.qs-otx{font-size:15px;color:rgba(255,255,255,0.8);line-height:1.5;}
+.qs-opt.sel .qs-otx{color:rgba(255,255,255,0.95);}
+.qs-rh{text-align:center;margin-bottom:40px;}
+.qs-ring{width:130px;height:130px;margin:0 auto 16px;position:relative;}
+.qs-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.qs-ring .rbg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:6;}
+.qs-ring .rfill{fill:none;stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease;}
+.qs-rnum{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.qs-rnum .big{font-family:'JetBrains Mono',monospace;font-size:34px;font-weight:700;color:#B8943E;line-height:1;}
+.qs-rnum .sm{font-size:12px;color:rgba(255,255,255,0.3);margin-top:2px;}
+.qs-rlev{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.qs-rwf{font-size:14px;color:rgba(255,255,255,0.4);}
+.qs-radar{display:flex;justify-content:center;margin-bottom:36px;}
+.qs-radar svg{width:300px;height:300px;}
+.qs-ai{background:rgba(184,148,62,0.06);border:1px solid rgba(184,148,62,0.15);border-radius:10px;padding:24px 28px;margin-bottom:36px;}
+.qs-ail{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#B8943E;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.qs-ail::before{content:'';width:6px;height:6px;border-radius:50%;background:#B8943E;opacity:0.6;}
+.qs-ait{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.75;}
+.qs-dims{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;}
+.qs-dr{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.05);}
+.qs-db{flex-shrink:0;width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;}
+.qs-db.hi{background:rgba(107,143,113,0.15);color:#6B8F71;}
+.qs-db.md{background:rgba(184,148,62,0.15);color:#B8943E;}
+.qs-db.lo{background:rgba(196,85,58,0.12);color:#C4553A;}
+.qs-di{flex:1;}
+.qs-dn{font-size:14px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:3px;}
+.qs-ds{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.55;}
+.qs-cta{background:rgba(255,255,255,0.04);border:1px solid rgba(184,148,62,0.2);border-radius:12px;padding:36px;text-align:center;}
+.qs-cth{font-family:'Instrument Serif',Georgia,serif;font-size:24px;color:#fff;margin-bottom:10px;}
+.qs-cts{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.65;max-width:480px;margin:0 auto 28px;}
+.qs-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:0 auto;}
+.qs-form .fw{grid-column:1/-1;}
+.qs-fi{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:14px;color:#fff;transition:border-color 0.2s;width:100%;}
+.qs-fi::placeholder{color:rgba(255,255,255,0.3);}
+.qs-fi:focus{outline:none;border-color:#B8943E;}
+.qs-fi option{background:#0F1A12;color:#fff;}
+.qs-fsel{background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer;}
+.qs-sbm{display:flex;align-items:center;justify-content:center;gap:9px;background:#B8943E;color:#0F1A12;font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;padding:14px 28px;border-radius:6px;border:none;cursor:pointer;transition:all 0.2s;margin-top:6px;width:100%;}
+.qs-sbm:hover{background:#C9A44A;transform:translateY(-1px);}
+.qs-sbm svg{width:15px;height:15px;}
+.qs-cv{text-align:center;padding:36px 0;}
+.qs-cvi{width:60px;height:60px;background:rgba(107,143,113,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.qs-cvi svg{width:30px;height:30px;stroke:#6B8F71;}
+.qs-cvt{font-family:'Instrument Serif',Georgia,serif;font-size:26px;color:#fff;margin-bottom:10px;}
+.qs-cvp{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:440px;margin:0 auto;}
+.qs-cvp strong{color:rgba(255,255,255,0.8);}
+.qs-ref{margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);}
+.qs-refl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+.qs-refp{font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:14px;line-height:1.6;}
+.qs-copy{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:11px 20px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.qs-copy:hover{border-color:rgba(255,255,255,0.25);color:#fff;}
+.qs-copy.ok{border-color:rgba(107,143,113,0.4);color:#6B8F71;}
+.qs-copy svg{width:16px;height:16px;}
+@media(max-width:768px){.qs-wrap{padding:64px 20px;}.qs-box{padding:28px 20px;}.qs-form{grid-template-columns:1fr;}.qs-radar svg{width:260px;height:260px;}.qs-dr{flex-direction:column;gap:8px;}.qs-ai{padding:20px 18px;}}
+</style>
+
+<div class="qs-wrap">
+<div class="qs-in">
+<div class="qs-label">Free Diagnostic</div>
+<h2>How healthy is your operation?</h2>
+<p class="qs-desc">8 questions. 3 minutes. A clear picture of where your workflow is strong, where it's bleeding time, and what to fix first.</p>
+
+<div class="qs-box">
+
+<div class="qs-step on" id="qsI">
+<div class="qs-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg></div>
+<div class="qs-ih">Before we start</div>
+<p class="qs-it">Think of <strong>one specific workflow</strong> your team runs regularly — in finance, HR, client delivery, onboarding, reporting, or operations.<br><br>Pick the one that feels like it takes <strong>more time, more people, or more effort than it should.</strong><br><br>Answer every question with that workflow in mind.</p>
+<div class="qs-ip">Which area is this workflow in?</div>
+<select class="qs-sel" id="qsSel" onchange="qsWfChange()">
+<option value="" disabled selected>Select a workflow area</option>
+<option value="Client Delivery">Client Delivery</option>
+<option value="Finance & Invoicing">Finance &amp; Invoicing</option>
+<option value="HR & Hiring">HR &amp; Hiring</option>
+<option value="Reporting & Analytics">Reporting &amp; Analytics</option>
+<option value="Sales & CRM">Sales &amp; CRM</option>
+<option value="Onboarding">Onboarding</option>
+<option value="Other">Other</option>
+</select>
+<div class="qs-oth" id="qsOth"><input type="text" id="qsOthIn" placeholder="e.g., Procurement, Quality Assurance, Inventory..." onkeyup="qsOthType()" onchange="qsOthType()"></div>
+<div class="qs-nav"><button class="qs-bk hid"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg> Back</button><button class="qs-nx" id="qsStart" onclick="qsBegin()">Begin Scan <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+</div>
+
+<div class="qs-step" id="qsQ">
+<div class="qs-pb"><div class="qs-pbr"><div class="qs-pbf" id="qsPF"></div></div><div class="qs-pbt" id="qsPT">1 of 8</div></div>
+<div class="qs-dim" id="qsD"></div>
+<div class="qs-qt" id="qsQT"></div>
+<div class="qs-opts" id="qsOpts"></div>
+<div class="qs-nav"><button class="qs-bk" onclick="qsPrev()"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg> Back</button><button class="qs-nx" id="qsNx" onclick="qsNext()">Next <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div>
+</div>
+
+<div class="qs-step" id="qsR"></div>
+
+<div class="qs-step" id="qsC">
+<div class="qs-cv">
+<div class="qs-cvi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+<div class="qs-cvt">Your report is on its way.</div>
+<p class="qs-cvp">Check your inbox within <strong>24 hours</strong> for your full Operations Health Report — including estimated cost of gaps, priority recommendations, and industry benchmarks for your workflow.<br><br>If you need it sooner, reply to the email and I'll prioritize it.</p>
+<div class="qs-ref">
+<div class="qs-refl">Know someone who needs this?</div>
+<p class="qs-refp">Know a founder or ops leader dealing with similar challenges? Share this scan with them.</p>
+<button class="qs-copy" id="qsCopy" onclick="qsCopyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy scan link</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+var qsData=[
+{d:"Process Maturity",q:"If you pulled a new person into this workflow tomorrow, how would they learn it?",o:[{t:"There\u2019s a documented playbook they could follow on their own.",s:5},{t:"A teammate would walk them through it \u2014 most of the knowledge is verbal.",s:3},{t:"They\u2019d have to shadow someone and pick it up over time \u2014 there\u2019s no single source of truth.",s:2}]},
+{d:"Technology Utilization",q:"What tools run this workflow?",o:[{t:"One integrated system handles most of it end-to-end.",s:5},{t:"A few different tools \u2014 the team knows how to move between them, but nothing is fully connected.",s:3},{t:"Mostly spreadsheets, email, and manual handoffs between tools.",s:2}]},
+{d:"Team Efficiency",q:"When this workflow gets backed up, how does the team handle it?",o:[{t:"We can see where the bottleneck is and redistribute based on capacity.",s:5},{t:"A manager steps in, reprioritizes, and people stretch to cover it.",s:3},{t:"The team pushes through \u2014 it gets done but it\u2019s not sustainable when it spikes.",s:2}]},
+{d:"SLA & Quality",q:"How do you know when this workflow is falling behind or producing errors?",o:[{t:"We have metrics or dashboards that flag issues before they escalate.",s:5},{t:"Usually when a manager reviews it or someone downstream raises a concern.",s:3},{t:"Typically when a client or stakeholder follows up \u2014 we catch it late more often than we\u2019d like.",s:2}]},
+{d:"Cost Management",q:"Do you know what this workflow costs you \u2014 in time, people, or money \u2014 per unit of output?",o:[{t:"Yes \u2014 we can tie cost to each completed unit (per invoice, per ticket, per deliverable).",s:5},{t:"Roughly \u2014 we know the headcount involved but haven\u2019t calculated the per-unit cost.",s:3},{t:"Not specifically \u2014 we know it\u2019s expensive but haven\u2019t quantified it at that level.",s:2}]},
+{d:"Knowledge Management",q:"If the person who knows this workflow best gave notice tomorrow, how much of what they know is written down?",o:[{t:"Most of it \u2014 the process, the exceptions, the workarounds are all documented.",s:5},{t:"Some \u2014 the basics are captured but the nuances and edge cases live in their head.",s:3},{t:"Very little \u2014 they\u2019re the go-to person because they carry knowledge nobody else has.",s:2}]},
+{d:"Scalability",q:"If the volume going through this workflow doubled in the next 6 months, what happens?",o:[{t:"It scales \u2014 the process and tools are designed to handle more without adding people proportionally.",s:5},{t:"We\u2019d need to add headcount \u2014 the process works but it\u2019s people-dependent.",s:3},{t:"It would start breaking \u2014 we\u2019re already feeling pressure at current volume.",s:2}]},
+{d:"Automation Readiness",q:"How many steps in this workflow involve someone manually moving information from one place to another \u2014 between tools, spreadsheets, emails, or systems?",o:[{t:"Very few \u2014 most data flows between our systems automatically.",s:5},{t:"Several \u2014 there are clear handoff points where someone has to re-enter or copy-paste.",s:3},{t:"It\u2019s most of the workflow \u2014 nearly every step involves someone manually moving or reformatting information.",s:2}]}
+];
+var qsIns={"Process Maturity":{5:"Your process documentation is solid \u2014 new people can ramp independently.",3:"Knowledge lives in people more than playbooks. That works until someone leaves or you need to scale.",2:"Tribal knowledge is running this workflow. Every new hire depends on someone else\u2019s time to get up to speed."},"Technology Utilization":{5:"Your tools are working together \u2014 that\u2019s rare at this stage.",3:"Your team is the integration layer, manually bridging gaps between disconnected tools.",2:"Spreadsheets and email are doing the heavy lifting. There\u2019s significant room to consolidate and connect."},"Team Efficiency":{5:"You have visibility into capacity and can redistribute intelligently.",3:"When things spike, managers scramble. It works but depends on individual effort, not systems.",2:"The team absorbs spikes through effort, not infrastructure. That\u2019s a resilience risk."},"SLA & Quality":{5:"Issues surface proactively \u2014 you catch problems before clients feel them.",3:"Quality depends on manual checkpoints. Some issues slip through before they\u2019re caught.",2:"Problems surface reactively. By the time you know, someone downstream already felt it."},"Cost Management":{5:"You know what this workflow costs per unit \u2014 that\u2019s operational maturity.",3:"You know the total cost but can\u2019t pinpoint where the money goes per deliverable.",2:"The cost is real but invisible at the unit level. That makes it hard to improve what you can\u2019t measure."},"Knowledge Management":{5:"Knowledge is documented and transferable. You\u2019ve built resilience into the workflow.",3:"The basics are captured but the nuances live in people\u2019s heads \u2014 that\u2019s a single point of failure.",2:"Key people carry key knowledge. If they leave, the workflow takes a serious hit."},"Scalability":{5:"This workflow is built for growth \u2014 it won\u2019t break with volume.",3:"Growth means proportionally more people. There\u2019s no leverage built into the current design.",2:"You\u2019re already feeling strain at current volume. Scaling means something has to change."},"Automation Readiness":{5:"You\u2019ve minimized manual handoffs \u2014 data moves on its own.",3:"There are clear handoff points where people re-enter or copy-paste data. Those are automation candidates.",2:"Information moves by hand at almost every step. These are the handoffs where time and errors accumulate."}};
+var qsCur=0,qsAns=new Array(8).fill(null),qsWf='',qsShuf=[];
+function qsInitShuf(){qsShuf=qsData.map(function(q){var a=[0,1,2];for(var i=2;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=a[i];a[i]=a[j];a[j]=tmp;}return a;});}
+qsInitShuf();
+function qsWfChange(){var s=document.getElementById('qsSel');var o=document.getElementById('qsOth');var oi=document.getElementById('qsOthIn');if(s.value==='Other'){o.classList.add('vis');setTimeout(function(){oi.focus();},350);if(oi.value.trim()){qsWf=oi.value.trim();s.classList.add('has');document.getElementById('qsStart').classList.add('go');}else{document.getElementById('qsStart').classList.remove('go');}}else{o.classList.remove('vis');qsWf=s.value;s.classList.add('has');document.getElementById('qsStart').classList.add('go');}}
+function qsOthType(){var v=document.getElementById('qsOthIn').value.trim();if(v){qsWf=v;document.getElementById('qsStart').classList.add('go');}else{document.getElementById('qsStart').classList.remove('go');}}
+function qsBegin(){if(!qsWf)return;document.getElementById('qsI').classList.remove('on');document.getElementById('qsQ').classList.add('on');qsCur=0;qsRender();}
+function qsRender(){var q=qsData[qsCur],ord=qsShuf[qsCur];document.getElementById('qsPF').style.width=((qsCur+1)/8*100)+'%';document.getElementById('qsPT').textContent=(qsCur+1)+' of 8';document.getElementById('qsD').textContent=q.d;document.getElementById('qsQT').textContent=q.q;var el=document.getElementById('qsOpts');el.innerHTML='';ord.forEach(function(oi){var opt=q.o[oi];var d=document.createElement('div');d.className='qs-opt'+(qsAns[qsCur]===oi?' sel':'');d.onclick=function(){qsSel(oi);};d.innerHTML='<div class="qs-rad"><div class="qs-dot"></div></div><div class="qs-otx">'+opt.t+'</div>';el.appendChild(d);});var nx=document.getElementById('qsNx');if(qsAns[qsCur]!==null){nx.classList.add('go');}else{nx.classList.remove('go');}if(qsCur===7){nx.innerHTML='See Results <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}else{nx.innerHTML='Next <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';}}
+function qsSel(oi){qsAns[qsCur]=oi;var ord=qsShuf[qsCur];document.querySelectorAll('.qs-opt').forEach(function(el,di){el.classList.toggle('sel',ord[di]===oi);});document.getElementById('qsNx').classList.add('go');}
+function qsNext(){if(qsAns[qsCur]===null)return;if(qsCur<7){qsCur++;qsRender();var st=document.getElementById('qsQ');st.style.animation='none';st.offsetHeight;st.style.animation='';}else{qsShowRes();}}
+function qsPrev(){if(qsCur>0){qsCur--;qsRender();}else{document.getElementById('qsQ').classList.remove('on');document.getElementById('qsI').classList.add('on');}}
+function qsInterp(sc,wf,avg){var w=sc.reduce(function(m,s){return s.s<m.s?s:m;},sc[0]);var w2=sc.filter(function(s){return s.d!==w.d;}).reduce(function(m,s){return s.s<m.s?s:m;},sc[0]);if(avg<=2.5)return'Your '+wf.toLowerCase()+' workflow is running on effort, not infrastructure. That\u2019s common for a company that\u2019s grown quickly \u2014 the process that worked with a smaller team hasn\u2019t been rebuilt for today\u2019s volume. The pattern here: '+w.d.toLowerCase()+' and '+w2.d.toLowerCase()+' are your two biggest exposure areas. When these are weak together, the cost compounds \u2014 your team spends more time managing the workflow than doing the actual work. The good news: workflows at this stage typically have the highest ROI for improvement because there\u2019s low-hanging fruit across almost every dimension.';if(avg<=3.5)return'Your '+wf.toLowerCase()+' workflow has a real foundation \u2014 but it\u2019s uneven. Some areas are working, others are holding you back. The gap between your strongest and weakest dimensions is where the friction lives. '+w.d+' stands out as the area most likely to create problems as you grow. Targeted intervention here \u2014 not a full overhaul \u2014 would unlock noticeable improvement within 60\u201390 days.';return'Your '+wf.toLowerCase()+' workflow is in strong shape. You\u2019ve built systems where most companies are still improvising. The opportunity now isn\u2019t fixing what\u2019s broken \u2014 it\u2019s optimizing what works. '+w.d+' is your relative weakest area, and even incremental improvement there could compound the gains you\u2019ve already made elsewhere.';}
+function qsShowRes(){document.getElementById('qsQ').classList.remove('on');document.getElementById('qsR').classList.add('on');var sc=qsData.map(function(q,i){return{d:q.d,s:q.o[qsAns[i]].s};});var avg=sc.reduce(function(s,x){return s+x.s;},0)/sc.length;var ar=Math.round(avg*10)/10;var lev,lc;if(avg>=4){lev='OPTIMIZED';lc='#6B8F71';}else if(avg>=3){lev='MANAGED';lc='#6B8F71';}else if(avg>=2.5){lev='DEVELOPING';lc='#B8943E';}else{lev='DEVELOPING';lc='#C4553A';}var interp=qsInterp(sc,qsWf,avg);var cx=160,cy=160,rr=120,n=8;function pol(i,v){var a=(Math.PI*2*i/n)-Math.PI/2;var d=(v/5)*rr;return{x:cx+d*Math.cos(a),y:cy+d*Math.sin(a)};}var grd='',ax='';[1,2,3,4,5].forEach(function(ring){var pts=[];for(var i=0;i<n;i++){var p=pol(i,ring);pts.push(p.x+','+p.y);}grd+='<polygon points="'+pts.join(' ')+'" fill="none" stroke="rgba(255,255,255,'+(ring===5?0.08:0.04)+')" stroke-width="1"/>';});for(var i=0;i<n;i++){var p=pol(i,5);ax+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p.x+'" y2="'+p.y+'" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';}var dp=sc.map(function(s,i){var p=pol(i,s.s);return p.x+','+p.y;});var dots='';sc.forEach(function(s,i){var p=pol(i,s.s);var c=s.s>=4?'#6B8F71':s.s>=3?'#B8943E':'#C4553A';dots+='<circle cx="'+p.x+'" cy="'+p.y+'" r="4" fill="'+c+'"/>';});var sl={"Process Maturity":"Process","Technology Utilization":"Technology","Team Efficiency":"Team","SLA & Quality":"SLA & Quality","Cost Management":"Cost","Knowledge Management":"Knowledge","Scalability":"Scalability","Automation Readiness":"Automation"};var labs='';sc.forEach(function(s,i){var p=pol(i,6.2);var anch=p.x<cx-10?'end':p.x>cx+10?'start':'middle';var dy=p.y<cy-10?'-4':p.y>cy+10?'12':'4';var lb=sl[s.d]||s.d;var c=s.s>=4?'rgba(107,143,113,0.8)':s.s>=3?'rgba(184,148,62,0.7)':'rgba(196,85,58,0.7)';labs+='<text x="'+p.x+'" y="'+p.y+'" dy="'+dy+'" text-anchor="'+anch+'" fill="'+c+'" font-family="monospace" font-size="10" letter-spacing="0.5">'+lb+'</text>';});var circ=2*Math.PI*58;var off=circ-(avg/5)*circ;var stk=avg>=3.5?'#6B8F71':avg>=2.5?'#B8943E':'#C4553A';var dh='';sc.forEach(function(s){var bc=s.s>=4?'hi':s.s>=3?'md':'lo';var ins=qsIns[s.d][s.s]||'';dh+='<div class="qs-dr"><div class="qs-db '+bc+'">'+s.s+'.0</div><div class="qs-di"><div class="qs-dn">'+s.d+'</div><div class="qs-ds">'+ins+'</div></div></div>';});document.getElementById('qsR').innerHTML='<div class="qs-rh"><div class="qs-ring"><svg viewBox="0 0 140 140"><circle class="rbg" cx="70" cy="70" r="58"/><circle class="rfill" cx="70" cy="70" r="58" stroke="'+stk+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'"/></svg><div class="qs-rnum"><div class="big">'+ar+'</div><div class="sm">out of 5.0</div></div></div><div class="qs-rlev" style="color:'+lc+'">'+lev+'</div><div class="qs-rwf">Workflow assessed: '+qsWf+'</div></div><div class="qs-radar"><svg viewBox="0 0 320 320">'+grd+ax+'<polygon points="'+dp.join(' ')+'" fill="rgba(107,143,113,0.12)" stroke="rgba(107,143,113,0.5)" stroke-width="2"/>'+dots+labs+'</svg></div><div class="qs-ai"><div class="qs-ail">Your Quick Scan Interpretation</div><div class="qs-ait">'+interp+'</div></div><div class="qs-dims">'+dh+'</div><div class="qs-cta"><div class="qs-cth">Get your full Operations Health Report</div><p class="qs-cts">Includes estimated annual cost of these gaps, priority recommendations for your weakest dimensions, and industry benchmarks for companies at your stage.</p><div class="qs-form"><input type="text" class="qs-fi" id="qsFN" placeholder="Full name"><input type="email" class="qs-fi" id="qsFE" placeholder="Work email"><input type="text" class="qs-fi" id="qsFC" placeholder="Company name"><input type="text" class="qs-fi" id="qsFR" placeholder="Your role"><select class="qs-fi qs-fsel fw" id="qsFS"><option value="" disabled selected>Company size</option><option value="1-10">1\u201310 employees</option><option value="11-50">11\u201350 employees</option><option value="51-200">51\u2013200 employees</option><option value="201-500">201\u2013500 employees</option><option value="500+">500+ employees</option></select><button class="qs-sbm fw" onclick="qsSubmit()">Send me the full report <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div></div>';}
+function qsSubmit(){var n=document.getElementById('qsFN').value.trim(),e=document.getElementById('qsFE').value.trim(),c=document.getElementById('qsFC').value.trim(),r=document.getElementById('qsFR').value.trim(),s=document.getElementById('qsFS').value;if(!n||!e||!c||!r||!s){['qsFN','qsFE','qsFC','qsFR','qsFS'].forEach(function(id){var el=document.getElementById(id);if(!el.value.trim()){el.style.borderColor='#C4553A';setTimeout(function(){el.style.borderColor='';},2000);}});return;}var payload={name:n,email:e,company:c,role:r,companySize:s,workflowArea:qsWf,scores:qsData.map(function(q,i){return{dimension:q.d,score:q.o[qsAns[i]].s,answer:q.o[qsAns[i]].t};}),overallScore:Math.round(qsData.reduce(function(sum,q,i){return sum+q.o[qsAns[i]].s;},0)/8*10)/10,submittedAt:new Date().toISOString()};console.log('Quick Scan Submission:',JSON.stringify(payload,null,2));document.getElementById('qsR').classList.remove('on');document.getElementById('qsC').classList.add('on');}
+function qsCopyLink(){var btn=document.getElementById('qsCopy');var url=window.location.href.split('?')[0];if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){qsCopied(btn);}).catch(function(){qsFB(url,btn);});}else{qsFB(url,btn);}}
+function qsFB(url,btn){var inp=document.createElement('input');inp.value=url;document.body.appendChild(inp);inp.select();document.execCommand('copy');document.body.removeChild(inp);qsCopied(btn);}
+function qsCopied(btn){btn.classList.add('ok');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Link copied!';setTimeout(function(){btn.classList.remove('ok');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy scan link';},3000);}
+function qsResize(){var h=document.querySelector('.qs-wrap').scrollHeight;if(window.parent!==window){window.parent.postMessage({type:'qs-resize',height:h},'*');}}
+var qsRO=new ResizeObserver(function(){qsResize();});
+qsRO.observe(document.querySelector('.qs-wrap'));
+window.addEventListener('load',qsResize);
+</script>
