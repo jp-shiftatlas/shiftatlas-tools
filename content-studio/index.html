@@ -125,6 +125,49 @@ body{font-family:'DM Sans',sans-serif;color:#fff;-webkit-font-smoothing:antialia
 .cs-pcta strong{color:#B8943E;font-style:normal;font-weight:600;letter-spacing:0.5px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;margin-right:6px;}
 .cs-ptags{font-size:12px;color:#6B8F71;line-height:1.5;word-break:break-word;}
 
+/* ===== INSTAGRAM REELS TAB ===== */
+.cs-reel{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:28px;align-items:start;}
+@media(max-width:820px){.cs-reel{grid-template-columns:1fr;gap:22px;}}
+
+/* LEFT: video + meta */
+.cs-rvid-wrap{display:flex;flex-direction:column;gap:12px;}
+
+.cs-rvid{position:relative;width:100%;aspect-ratio:9/16;background:#000;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.35);}
+.cs-rvid video{width:100%;height:100%;object-fit:cover;display:block;background:#000;}
+.cs-rvid-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(180deg,transparent 0%,transparent 60%,rgba(0,0,0,0.4) 100%);transition:background 0.2s;}
+.cs-rvid-overlay:hover{background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.15) 60%,rgba(0,0,0,0.5) 100%);}
+.cs-rvid-overlay.playing{opacity:0;}
+.cs-rvid-overlay.playing:hover{opacity:1;}
+.cs-rvid-play{width:54px;height:54px;color:#fff;background:rgba(184,148,62,0.9);border-radius:50%;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:transform 0.2s;}
+.cs-rvid-overlay:hover .cs-rvid-play{transform:scale(1.05);}
+
+.cs-rvid-meta{padding:12px 14px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:8px;}
+.cs-rvid-mlab{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:4px;}
+.cs-rvid-mval{font-size:13px;color:rgba(255,255,255,0.85);font-weight:500;}
+
+/* RIGHT: production blueprint */
+.cs-rblueprint{display:flex;flex-direction:column;gap:22px;}
+
+.cs-rhead{padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.cs-rtag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#B8943E;margin-bottom:8px;}
+.cs-rtitle{font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1.2;color:#fff;margin-bottom:8px;}
+.cs-rgoal{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;font-style:italic;}
+
+.cs-rsec{display:flex;flex-direction:column;}
+.cs-rseclab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6B8F71;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.cs-rseclab::before{content:'';width:6px;height:6px;border-radius:50%;background:#6B8F71;}
+
+.cs-rprompt{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;background:rgba(0,0,0,0.25);padding:14px 16px;border-radius:8px;border-left:2px solid rgba(184,148,62,0.4);font-family:'DM Sans',sans-serif;}
+
+.cs-rframes{display:flex;flex-direction:column;gap:8px;}
+.cs-rframe{display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(0,0,0,0.2);border-radius:7px;border:1px solid rgba(255,255,255,0.04);}
+.cs-rftime{font-family:'JetBrains Mono',monospace;font-size:11px;color:#B8943E;background:rgba(184,148,62,0.1);padding:3px 8px;border-radius:4px;letter-spacing:0.5px;flex-shrink:0;font-weight:500;min-width:46px;text-align:center;}
+.cs-rftxt{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;font-style:italic;}
+
+.cs-raudio{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;}
+
+.cs-rcta{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#0F1A12;background:#B8943E;padding:8px 14px;border-radius:6px;letter-spacing:0.3px;}
+
 /* typing cursor */
 .cs-cursor{display:inline-block;width:7px;height:14px;background:#B8943E;vertical-align:middle;margin-left:2px;animation:blink 0.9s infinite;}
 @keyframes blink{0%,50%{opacity:1;}51%,100%{opacity:0;}}
@@ -146,7 +189,7 @@ body{font-family:'DM Sans',sans-serif;color:#fff;-webkit-font-smoothing:antialia
   <div class="cs-head">
     <div class="cs-tag">Content Studio · Live Demo</div>
     <h1 class="cs-title">AI-Powered Brand Content System</h1>
-    <p class="cs-sub">Upload product info and a label. Get a publish-ready listing and a set of on-brand Instagram posts — with cohesive voice, visual direction, and hashtag strategy. Built on Claude with persistent brand memory.</p>
+    <p class="cs-sub">Upload product info and a label. Get a publish-ready listing, on-brand Instagram posts, and reel concepts with full production blueprints — voice, visuals, and direction, all consistent. Built on Claude with persistent brand memory.</p>
   </div>
 
   <!-- SPLIT GRID -->
@@ -224,7 +267,7 @@ Price: ₱4000</textarea>
           </div>
           <div class="cs-lstep" data-step="3">
             <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span>Curating Instagram post concepts</span>
+            <span>Curating Instagram posts and reel concepts</span>
           </div>
           <div class="cs-lstep" data-step="4">
             <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -239,6 +282,7 @@ Price: ₱4000</textarea>
         <div class="cs-tabs">
           <button class="cs-tab on" data-tab="listing" onclick="switchTab('listing')">Product Listing</button>
           <button class="cs-tab" data-tab="calendar" onclick="switchTab('calendar')">Instagram Posts</button>
+          <button class="cs-tab" data-tab="reels" onclick="switchTab('reels')">Instagram Reels</button>
         </div>
 
         <!-- TAB: LISTING -->
@@ -282,6 +326,80 @@ Price: ₱4000</textarea>
         <!-- TAB: CALENDAR -->
         <div class="cs-tabpane" id="tab-calendar">
           <div class="cs-ig-wrap" id="igFeed"></div>
+        </div>
+
+        <!-- TAB: REELS -->
+        <div class="cs-tabpane" id="tab-reels">
+          <div class="cs-reel">
+
+            <!-- LEFT: VIDEO -->
+            <div class="cs-rvid-wrap">
+              <div class="cs-rvid">
+                <video id="reelPlayer" muted loop playsinline preload="metadata" poster="">
+                  <source src="Reel_001.mp4" type="video/mp4">
+                </video>
+                <div class="cs-rvid-overlay" id="reelOverlay" onclick="toggleReel()">
+                  <svg class="cs-rvid-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              <div class="cs-rvid-meta">
+                <div class="cs-rvid-mlab">Funnel stage</div>
+                <div class="cs-rvid-mval">Top of funnel · Awareness</div>
+              </div>
+              <div class="cs-rvid-meta">
+                <div class="cs-rvid-mlab">Duration</div>
+                <div class="cs-rvid-mval">6–8 seconds</div>
+              </div>
+              <div class="cs-rvid-meta">
+                <div class="cs-rvid-mlab">Best for</div>
+                <div class="cs-rvid-mval">Cold audience reach campaigns</div>
+              </div>
+            </div>
+
+            <!-- RIGHT: PRODUCTION BLUEPRINT -->
+            <div class="cs-rblueprint">
+
+              <div class="cs-rhead">
+                <div class="cs-rtag">Story 01</div>
+                <div class="cs-rtitle">Origin Hook</div>
+                <div class="cs-rgoal">Stop the scroll. Establish premium origin and Filipino pride.</div>
+              </div>
+
+              <div class="cs-rsec">
+                <div class="cs-rseclab">Video Prompt</div>
+                <div class="cs-rprompt">Cinematic vertical video, 9:16 aspect ratio, 6 seconds. Slow drone push-in over the misty Benguet mountain highlands at golden sunrise — fog rolling between pine trees, terraced coffee farms emerging from the mist. Cut to a close-up macro shot of a Filipino farmer's hands gently holding ripe red coffee cherries on the branch, dew glistening. Cut to a slow rotating shot of a dark matte Zojak Coffee Civet 250g bag standing on a weathered wooden surface, soft warm sunlight from the side. Documentary cinematography, shallow depth of field, warm earthy color grading. Atmospheric, proud, premium feel.</div>
+              </div>
+
+              <div class="cs-rsec">
+                <div class="cs-rseclab">On-screen Text</div>
+                <div class="cs-rframes">
+                  <div class="cs-rframe">
+                    <div class="cs-rftime">0–2s</div>
+                    <div class="cs-rftxt">"Grown 5,000 ft above sea level."</div>
+                  </div>
+                  <div class="cs-rframe">
+                    <div class="cs-rftime">3–5s</div>
+                    <div class="cs-rftxt">"Hand-gathered. Single-origin."</div>
+                  </div>
+                  <div class="cs-rframe">
+                    <div class="cs-rftime">6–8s</div>
+                    <div class="cs-rftxt">"Zojak Coffee. Benguet, Philippines."</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cs-rsec">
+                <div class="cs-rseclab">Audio Direction</div>
+                <div class="cs-raudio">Slow ambient cinematic track — soft acoustic guitar or kulintang (Filipino gong) with subtle natural ambience: birds, wind.</div>
+              </div>
+
+              <div class="cs-rsec">
+                <div class="cs-rseclab">CTA Sticker</div>
+                <div class="cs-rcta">Tap to shop →</div>
+              </div>
+
+            </div>
+          </div>
         </div>
 
       </div>
@@ -394,6 +512,28 @@ function switchTab(which) {
   document.querySelectorAll('.cs-tabpane').forEach(p => {
     p.classList.toggle('on', p.id === 'tab-' + which);
   });
+  // Pause reel video when switching away
+  if (which !== 'reels') {
+    const v = document.getElementById('reelPlayer');
+    const overlay = document.getElementById('reelOverlay');
+    if (v && !v.paused) {
+      v.pause();
+      if (overlay) overlay.classList.remove('playing');
+    }
+  }
+}
+
+function toggleReel() {
+  const v = document.getElementById('reelPlayer');
+  const overlay = document.getElementById('reelOverlay');
+  if (!v) return;
+  if (v.paused) {
+    v.play();
+    overlay.classList.add('playing');
+  } else {
+    v.pause();
+    overlay.classList.remove('playing');
+  }
 }
 
 // ============ TYPING RENDER ============
