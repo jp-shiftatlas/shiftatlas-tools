@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shift Atlas Tools — Live Demos</title>
+<link rel="icon" type="image/png" href="favicon512x512.png">
+<meta name="description" content="Live demos of AI-powered tools built by Shift Atlas. Diagnose, design, deliver.">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#0F1A12;min-height:100vh;}
+body{font-family:'DM Sans',sans-serif;color:#fff;-webkit-font-smoothing:antialiased;}
+
+.hub-wrap{max-width:1040px;margin:0 auto;padding:80px 32px 60px;min-height:100vh;display:flex;flex-direction:column;}
+
+/* HEADER */
+.hub-head{margin-bottom:56px;}
+.hub-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8943E;margin-bottom:14px;}
+.hub-title{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(36px,5vw,52px);line-height:1.1;margin-bottom:16px;letter-spacing:-0.01em;}
+.hub-sub{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:620px;}
+
+/* GRID */
+.hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:auto;}
+
+.hub-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;text-decoration:none;color:inherit;transition:all 0.25s ease;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.hub-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(184,148,62,0.3);transform:translateY(-2px);}
+.hub-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#B8943E,transparent);opacity:0;transition:opacity 0.3s;}
+.hub-card:hover::after{opacity:0.6;}
+
+.hub-ctag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6B8F71;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.hub-ctag::before{content:'';width:6px;height:6px;border-radius:50%;background:#6B8F71;}
+
+.hub-ctitle{font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1.2;margin-bottom:10px;color:#fff;}
+.hub-cdesc{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:20px;flex:1;}
+
+.hub-cstack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px;}
+.hub-chip{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(184,148,62,0.08);color:#B8943E;padding:4px 9px;border-radius:5px;border:1px solid rgba(184,148,62,0.18);letter-spacing:0.5px;}
+
+.hub-cmeta{margin-bottom:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);}
+.hub-cmeta + .hub-cmeta{padding-top:14px;}
+.hub-cmlab{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;}
+.hub-cmval{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;}
+.hub-cmval .dot{color:rgba(184,148,62,0.5);margin:0 6px;}
+.hub-cmval.demo{color:rgba(255,255,255,0.55);font-style:italic;}
+
+.hub-clink{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B8943E;display:flex;align-items:center;gap:8px;transition:gap 0.2s;}
+.hub-card:hover .hub-clink{gap:12px;}
+.hub-clink svg{width:14px;height:14px;}
+
+/* FOOTER */
+.hub-foot{margin-top:80px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.hub-footl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.hub-footl strong{color:#B8943E;}
+.hub-footr{font-size:13px;color:rgba(255,255,255,0.4);}
+.hub-footr a{color:#B8943E;text-decoration:none;transition:opacity 0.2s;}
+.hub-footr a:hover{opacity:0.8;}
+
+@media(max-width:640px){
+  .hub-wrap{padding:48px 24px 40px;}
+  .hub-head{margin-bottom:40px;}
+  .hub-grid{grid-template-columns:1fr;}
+  .hub-card{padding:28px 24px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hub-wrap">
+
+  <div class="hub-head">
+    <div class="hub-tag">Shift Atlas · Tools</div>
+    <h1 class="hub-title">Live demos of AI-powered operating tools.</h1>
+    <p class="hub-sub">Working prototypes of the systems I build for clients. Each one started as a real problem, became a real deliverable, and lives here as a transparent demo of what an AI-powered workflow actually looks like.</p>
+  </div>
+
+  <div class="hub-grid">
+
+    <a href="quickscan/" class="hub-card">
+      <div class="hub-ctag">Diagnostic Tool</div>
+      <div class="hub-ctitle">Operations Quick Scan</div>
+      <div class="hub-cdesc">A 4-minute self-assessment that maps where an operation is leaking time, where AI could compress cycles, and where process fixes would deliver faster. Powered by Claude, structured for founders and ops leaders.</div>
+      <div class="hub-cstack">
+        <span class="hub-chip">Anthropic SDK</span>
+        <span class="hub-chip">Make.com</span>
+        <span class="hub-chip">Automated PDF</span>
+        <span class="hub-chip">Email delivery</span>
+        <span class="hub-chip">Carrd embed</span>
+      </div>
+      <div class="hub-cmeta">
+        <div class="hub-cmlab">Useful for</div>
+        <div class="hub-cmval">Founder readiness assessments <span class="dot">·</span> Pre-engagement scoping calls <span class="dot">·</span> Team offsite prep <span class="dot">·</span> Ops audit intake</div>
+      </div>
+      <div class="hub-cmeta">
+        <div class="hub-cmlab">What this demonstrates</div>
+        <div class="hub-cmval demo">End-to-end AI workflow: structured input capture, Claude-powered analysis, automated report generation, and email delivery — without human touch after submit.</div>
+      </div>
+      <div class="hub-clink">
+        Open Demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <a href="content-studio/" class="hub-card">
+      <div class="hub-ctag">Content System</div>
+      <div class="hub-ctitle">AI Content Studio</div>
+      <div class="hub-cdesc">Product info in, publish-ready listing and on-brand Instagram posts out. Built on Claude with persistent brand memory for a Philippine specialty coffee brand — product catalog, editorial voice, and visual direction, all consistent without a content team in the loop.</div>
+      <div class="hub-cstack">
+        <span class="hub-chip">Claude</span>
+        <span class="hub-chip">Cowork memory</span>
+        <span class="hub-chip">Nanobanana</span>
+        <span class="hub-chip">Prompt chain</span>
+        <span class="hub-chip">Brand voice encoding</span>
+      </div>
+      <div class="hub-cmeta">
+        <div class="hub-cmlab">Useful for</div>
+        <div class="hub-cmval">E-commerce product launches <span class="dot">·</span> SMB content pipelines <span class="dot">·</span> Founder-led brands without a content team <span class="dot">·</span> SOP-driven creative workflows</div>
+      </div>
+      <div class="hub-cmeta">
+        <div class="hub-cmlab">What this demonstrates</div>
+        <div class="hub-cmval demo">Persistent brand memory architecture: encoding voice, aesthetic, and rules so AI output stays consistent across weeks of content without re-briefing — the hard part of replacing a content team.</div>
+      </div>
+      <div class="hub-clink">
+        Open Demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="hub-foot">
+    <div class="hub-footl">Built by <strong>Shift Atlas</strong> · Engineer first. Executive second.</div>
+    <div class="hub-footr"><a href="https://shiftatlas.tech" target="_blank">shiftatlas.tech</a></div>
+  </div>
+
+</div>
+
+</body>
+</html>
