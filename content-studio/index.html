@@ -1,1 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Content Studio — Shift Atlas Demo</title>
+<link rel="icon" type="image/png" href="favicon512x512.png">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#0F1A12;min-height:100vh;}
+body{font-family:'DM Sans',sans-serif;color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
+/* ===== LAYOUT ===== */
+.cs-wrap{max-width:1440px;margin:0 auto;padding:40px 32px 80px;}
+
+.cs-head{margin-bottom:32px;}
+.cs-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8943E;margin-bottom:10px;}
+.cs-title{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(28px,3.6vw,38px);line-height:1.15;margin-bottom:10px;}
+.cs-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.6;max-width:680px;}
+
+.cs-grid{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:24px;align-items:start;}
+@media(max-width:960px){.cs-grid{grid-template-columns:1fr;}}
+
+/* ===== PANEL SHARED ===== */
+.cs-panel{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:28px;}
+.cs-plabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6B8F71;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.cs-plabel::before{content:'';width:6px;height:6px;border-radius:50%;background:#6B8F71;}
+
+/* ===== INPUT (LEFT) ===== */
+.cs-field{margin-bottom:20px;}
+.cs-flab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
+.cs-ftxt{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:#fff;line-height:1.55;resize:vertical;min-height:120px;transition:border-color 0.2s;}
+.cs-ftxt:focus{outline:none;border-color:rgba(184,148,62,0.5);}
+.cs-ftxt::placeholder{color:rgba(255,255,255,0.25);}
+
+.cs-imgbox{background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);border-radius:10px;padding:14px;display:flex;align-items:center;gap:14px;}
+.cs-imgthumb{width:76px;height:76px;border-radius:8px;background:#000;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cs-imgthumb img{width:100%;height:100%;object-fit:cover;}
+.cs-imginfo{flex:1;min-width:0;}
+.cs-imgname{font-size:13px;color:rgba(255,255,255,0.85);font-weight:500;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cs-imgsize{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;}
+
+.cs-genbtn{width:100%;background:#B8943E;color:#0F1A12;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.3px;padding:14px;border-radius:8px;border:none;cursor:pointer;transition:all 0.2s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px;}
+.cs-genbtn:hover:not(:disabled){background:#C9A44A;transform:translateY(-1px);}
+.cs-genbtn:disabled{opacity:0.6;cursor:not-allowed;}
+.cs-genbtn svg{width:15px;height:15px;}
+
+.cs-stack{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.06);}
+.cs-slabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px;}
+.cs-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.cs-chip{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(184,148,62,0.1);color:#B8943E;padding:5px 10px;border-radius:5px;border:1px solid rgba(184,148,62,0.2);letter-spacing:0.5px;}
+
+/* ===== OUTPUT (RIGHT) ===== */
+.cs-out{min-height:720px;}
+
+.cs-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:660px;text-align:center;padding:40px;}
+.cs-emptico{width:56px;height:56px;border-radius:12px;background:rgba(184,148,62,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid rgba(184,148,62,0.2);}
+.cs-emptico svg{width:26px;height:26px;stroke:#B8943E;}
+.cs-empth{font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:rgba(255,255,255,0.85);margin-bottom:8px;}
+.cs-emptt{font-size:14px;color:rgba(255,255,255,0.4);max-width:340px;line-height:1.6;}
+
+.cs-loading{display:none;padding:40px;}
+.cs-loading.on{display:block;}
+.cs-ltitle{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8943E;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.cs-ltitle::before{content:'';width:8px;height:8px;border-radius:50%;background:#B8943E;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.cs-lsteps{display:flex;flex-direction:column;gap:12px;}
+.cs-lstep{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,0.3);transition:color 0.3s;}
+.cs-lstep.active{color:rgba(255,255,255,0.9);}
+.cs-lstep.done{color:#6B8F71;}
+.cs-lcheck{width:18px;height:18px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cs-lcheck svg{width:10px;height:10px;opacity:0;transition:opacity 0.2s;}
+.cs-lstep.done .cs-lcheck{background:#6B8F71;border-color:#6B8F71;}
+.cs-lstep.done .cs-lcheck svg{opacity:1;stroke:#0F1A12;}
+.cs-lstep.active .cs-lcheck{border-color:#B8943E;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.cs-results{display:none;}
+.cs-results.on{display:block;animation:csFade 0.4s ease;}
+@keyframes csFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== TABS ===== */
+.cs-tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(0,0,0,0.3);padding:4px;border-radius:10px;width:fit-content;}
+.cs-tab{background:none;border:none;color:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:7px;cursor:pointer;transition:all 0.2s;letter-spacing:0.2px;}
+.cs-tab:hover{color:rgba(255,255,255,0.8);}
+.cs-tab.on{background:rgba(184,148,62,0.15);color:#B8943E;}
+
+.cs-tabpane{display:none;}
+.cs-tabpane.on{display:block;animation:csFade 0.3s ease;}
+
+/* ===== PRODUCT LISTING OUTPUT ===== */
+.cs-sec{margin-bottom:24px;}
+.cs-sech{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6B8F71;margin-bottom:8px;}
+.cs-title-out{font-family:'Instrument Serif',Georgia,serif;font-size:24px;line-height:1.25;color:#fff;margin-bottom:4px;}
+.cs-short{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:14px;}
+.cs-full{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.75;}
+.cs-full p{margin-bottom:12px;}
+.cs-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px;padding:14px;background:rgba(0,0,0,0.25);border-radius:8px;}
+.cs-mi{display:flex;flex-direction:column;gap:3px;}
+.cs-mk{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.cs-mv{font-size:13px;color:#fff;font-weight:500;}
+.cs-mv.gold{color:#B8943E;}
+.cs-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.cs-kw{font-size:12px;background:rgba(107,143,113,0.12);color:#9ABBA0;padding:5px 10px;border-radius:5px;border:1px solid rgba(107,143,113,0.2);}
+
+/* ===== INSTAGRAM FEED ===== */
+.cs-ig-wrap{display:flex;flex-direction:column;gap:14px;}
+.cs-post{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;}
+.cs-ph{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);}
+.cs-phl{display:flex;align-items:center;gap:10px;}
+.cs-pavatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#B8943E,#6B8F71);display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',Georgia,serif;font-size:14px;color:#0F1A12;font-weight:700;}
+.cs-pname{font-size:13px;font-weight:600;color:rgba(255,255,255,0.9);}
+.cs-pdate{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1px;text-transform:uppercase;}
+.cs-pday{background:rgba(184,148,62,0.12);color:#B8943E;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;}
+
+.cs-pimg{width:100%;aspect-ratio:1/1;background:#000;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cs-pimg img{width:100%;height:100%;object-fit:cover;}
+.cs-pimg-placeholder{color:rgba(255,255,255,0.2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:20px;}
+
+.cs-pbody{padding:14px;}
+.cs-ptype{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6B8F71;margin-bottom:8px;}
+.cs-pcap{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.85);margin-bottom:10px;}
+.cs-pcta{font-size:12px;color:rgba(255,255,255,0.55);font-style:italic;padding-top:8px;margin-top:8px;border-top:1px dashed rgba(255,255,255,0.08);margin-bottom:10px;}
+.cs-pcta strong{color:#B8943E;font-style:normal;font-weight:600;letter-spacing:0.5px;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;margin-right:6px;}
+.cs-ptags{font-size:12px;color:#6B8F71;line-height:1.5;word-break:break-word;}
+
+/* typing cursor */
+.cs-cursor{display:inline-block;width:7px;height:14px;background:#B8943E;vertical-align:middle;margin-left:2px;animation:blink 0.9s infinite;}
+@keyframes blink{0%,50%{opacity:1;}51%,100%{opacity:0;}}
+
+/* ===== FOOTER STRIP ===== */
+.cs-foot{margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.cs-footl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.cs-footl strong{color:#B8943E;}
+.cs-footr{font-size:13px;color:rgba(255,255,255,0.4);}
+.cs-footr a{color:#B8943E;text-decoration:none;}
+.cs-footr a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="cs-wrap">
+
+  <!-- HEADER -->
+  <div class="cs-head">
+    <div class="cs-tag">Content Studio · Live Demo</div>
+    <h1 class="cs-title">AI-Powered Brand Content System</h1>
+    <p class="cs-sub">Upload product info and a label. Get a publish-ready listing and a set of on-brand Instagram posts — with cohesive voice, visual direction, and hashtag strategy. Built on Claude with persistent brand memory.</p>
+  </div>
+
+  <!-- SPLIT GRID -->
+  <div class="cs-grid">
+
+    <!-- LEFT: INPUTS -->
+    <div class="cs-panel">
+      <div class="cs-plabel">Inputs</div>
+
+      <div class="cs-field">
+        <div class="cs-flab">Product Info</div>
+        <textarea class="cs-ftxt" id="productInput" spellcheck="false">Medium Roast Civet - 250g
+Origin: Benguet Philippines
+Tasting notes: Nutty, Chocolatey
+Price: ₱4000</textarea>
+      </div>
+
+      <div class="cs-field">
+        <div class="cs-flab">Brand Asset</div>
+        <div class="cs-imgbox">
+          <div class="cs-imgthumb">
+            <img src="zojak-label.png" alt="Zojak label" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=&quot;color:rgba(255,255,255,0.3);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;text-align:center;padding:8px;&quot;>LABEL<br>PREVIEW</div>'">
+          </div>
+          <div class="cs-imginfo">
+            <div class="cs-imgname">Civet_Medium_Roast_250g.png</div>
+            <div class="cs-imgsize">1000 × 1000 · PNG</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="cs-genbtn" id="genBtn" onclick="runDemo()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span id="genBtnText">Generate Content</span>
+      </button>
+
+      <div class="cs-stack">
+        <div class="cs-slabel">System Stack</div>
+        <div class="cs-chips">
+          <span class="cs-chip">Claude</span>
+          <span class="cs-chip">Cowork</span>
+          <span class="cs-chip">Brand Memory</span>
+          <span class="cs-chip">Image Gen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: OUTPUT -->
+    <div class="cs-panel cs-out">
+      <div class="cs-plabel">Output</div>
+
+      <!-- EMPTY STATE -->
+      <div class="cs-empty" id="emptyState">
+        <div class="cs-emptico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="cs-empth">Ready to generate</div>
+        <div class="cs-emptt">Click <strong>Generate Content</strong> to see the system produce a full product listing and 7-day Instagram calendar from the inputs on the left.</div>
+      </div>
+
+      <!-- LOADING STATE -->
+      <div class="cs-loading" id="loadingState">
+        <div class="cs-ltitle">Generating</div>
+        <div class="cs-lsteps" id="loadingSteps">
+          <div class="cs-lstep" data-step="0">
+            <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Reading product info and brand asset</span>
+          </div>
+          <div class="cs-lstep" data-step="1">
+            <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Loading brand voice and aesthetic memory</span>
+          </div>
+          <div class="cs-lstep" data-step="2">
+            <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Drafting product listing and SEO metadata</span>
+          </div>
+          <div class="cs-lstep" data-step="3">
+            <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Curating Instagram post concepts</span>
+          </div>
+          <div class="cs-lstep" data-step="4">
+            <div class="cs-lcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Composing hashtag sets per post theme</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="cs-results" id="resultsState">
+
+        <div class="cs-tabs">
+          <button class="cs-tab on" data-tab="listing" onclick="switchTab('listing')">Product Listing</button>
+          <button class="cs-tab" data-tab="calendar" onclick="switchTab('calendar')">Instagram Posts</button>
+        </div>
+
+        <!-- TAB: LISTING -->
+        <div class="cs-tabpane on" id="tab-listing">
+          <div class="cs-sec">
+            <div class="cs-sech">Product Title</div>
+            <div class="cs-title-out" id="out-title"></div>
+          </div>
+
+          <div class="cs-sec">
+            <div class="cs-sech">Short Description</div>
+            <div class="cs-short" id="out-short"></div>
+          </div>
+
+          <div class="cs-sec">
+            <div class="cs-sech">Full Description</div>
+            <div class="cs-full" id="out-full"></div>
+          </div>
+
+          <div class="cs-sec">
+            <div class="cs-meta">
+              <div class="cs-mi"><div class="cs-mk">Origin</div><div class="cs-mv">Benguet, Philippines</div></div>
+              <div class="cs-mi"><div class="cs-mk">Roast</div><div class="cs-mv">Medium</div></div>
+              <div class="cs-mi"><div class="cs-mk">Weight</div><div class="cs-mv">250g</div></div>
+              <div class="cs-mi"><div class="cs-mk">Price</div><div class="cs-mv gold">₱4,000</div></div>
+            </div>
+          </div>
+
+          <div class="cs-sec">
+            <div class="cs-sech">SEO Keywords</div>
+            <div class="cs-keywords">
+              <span class="cs-kw">Philippine civet coffee</span>
+              <span class="cs-kw">Alamid luwak Arabica</span>
+              <span class="cs-kw">Benguet single origin</span>
+              <span class="cs-kw">Medium roast specialty coffee PH</span>
+              <span class="cs-kw">Zojak Coffee 250g</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: CALENDAR -->
+        <div class="cs-tabpane" id="tab-calendar">
+          <div class="cs-ig-wrap" id="igFeed"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="cs-foot">
+    <div class="cs-footl">Built by <strong>Shift Atlas</strong> · Engineer first. Executive second.</div>
+    <div class="cs-footr"><a href="https://shiftatlas.tech" target="_blank">shiftatlas.tech</a></div>
+  </div>
+
+</div>
+
+<script>
+// ============ DATA ============
+const LISTING = {
+  title: "Civet Coffee Medium Roast 250g — Single Origin Alamid Luwak Arabica from Benguet",
+  short: "Rare Philippine civet-processed Arabica from the highlands of Benguet, medium roasted to bring out smooth nutty and chocolatey notes with a mild acidity and clean finish.",
+  full: [
+    "This is Philippine civet coffee the way it's meant to be enjoyed — ethically gathered, carefully processed, and roasted with restraint. Our Alamid Luwak Arabica comes from the cool, misty highlands of Benguet, where the native Philippine civet (alamid) selects only the ripest coffee cherries. The beans are collected, thoroughly cleaned and fermented, then sun-dried before we roast them to a balanced medium.",
+    "The cup is everything you hope civet coffee will be: deeply nutty up front, with rich cocoa and dark chocolate rolling through the middle, and a gentle, mild acidity that keeps things bright without ever going sharp. The finish is remarkably smooth — no bitterness, no heaviness, just a clean, lingering sweetness.",
+    "We recommend brewing this one as pour-over or French press at around 1:16 coffee-to-water, just off the boil. Skip the milk the first time — this coffee deserves your full attention. Each 250g bag is sealed fresh at the roastery."
+  ]
+};
+
+const POSTS = [
+  {
+    day: "Mon",
+    theme: "Origin Spotlight",
+    img: "post-1-origin.png",
+    caption: "Straight from the misty highlands of Benguet — where the cool mountain air, volcanic soil, and the Philippine alamid come together to create something truly special. Our Civet Medium Roast is single-origin Arabica, carefully gathered and roasted right here at home. Philippine coffee, world-class cup. ☕🇵🇭",
+    cta: "Tap the link in bio to try a 250g bag.",
+    tags: "#ZojakCoffee #CivetCoffee #AlamidLuwak #BenguetCoffee #PhilippineCoffee #SingleOrigin #ArabicaPH #SupportLocalPH #SpecialtyCoffeePH"
+  },
+  {
+    day: "Wed",
+    theme: "Brewing Tip",
+    img: "post-3-brewing.png",
+    caption: "Midweek tip: our Civet Medium Roast shines brightest as pour-over or French press. Use a 1:16 ratio (about 15g coffee to 240ml water), water just off the boil, and a 4-minute steep or slow pour. And for the first cup? Skip the milk. Let it speak for itself. ✋",
+    cta: "Save this post for your next brew session.",
+    tags: "#ZojakCoffee #BrewingTips #PourOver #FrenchPress #HowToBrew #CoffeeAtHome #CivetCoffee #CoffeeRitual #SlowMornings"
+  },
+  {
+    day: "Fri",
+    theme: "Gift-Worthy",
+    img: "post-5-gift.png",
+    caption: "Looking for a gift that actually means something? A 250g bag of our single-origin Civet Medium Roast is the kind of pasalubong that makes people pause. Philippine-grown, Philippine-roasted, and packaged beautifully — because the people you love deserve the good stuff. 🎁",
+    cta: "Order now for same-week delivery — link in bio.",
+    tags: "#ZojakCoffee #CoffeeGift #PasalubongIdeas #GiftIdeasPH #CivetCoffee #PhilippineMade #MadeInThePhilippines #ShopLocalPH"
+  },
+];
+
+// ============ STATE FLOW ============
+let isGenerating = false;
+
+function runDemo() {
+  if (isGenerating) return;
+  isGenerating = true;
+
+  const btn = document.getElementById('genBtn');
+  const btnText = document.getElementById('genBtnText');
+  const empty = document.getElementById('emptyState');
+  const loading = document.getElementById('loadingState');
+  const results = document.getElementById('resultsState');
+
+  btn.disabled = true;
+  btnText.textContent = 'Generating...';
+
+  empty.style.display = 'none';
+  results.classList.remove('on');
+  loading.classList.add('on');
+
+  // reset loading steps
+  document.querySelectorAll('.cs-lstep').forEach(s => s.classList.remove('active','done'));
+
+  const steps = document.querySelectorAll('.cs-lstep');
+  const stepDelays = [450, 500, 650, 700, 500];
+  let currentStep = 0;
+
+  function advance() {
+    if (currentStep > 0) {
+      steps[currentStep - 1].classList.remove('active');
+      steps[currentStep - 1].classList.add('done');
+    }
+    if (currentStep < steps.length) {
+      steps[currentStep].classList.add('active');
+      setTimeout(advance, stepDelays[currentStep]);
+      currentStep++;
+    } else {
+      setTimeout(() => {
+        loading.classList.remove('on');
+        results.classList.add('on');
+        renderListing();
+        renderCalendar();
+        btn.disabled = false;
+        btnText.textContent = 'Regenerate';
+        isGenerating = false;
+      }, 300);
+    }
+  }
+  advance();
+}
+
+function switchTab(which) {
+  document.querySelectorAll('.cs-tab').forEach(t => {
+    t.classList.toggle('on', t.dataset.tab === which);
+  });
+  document.querySelectorAll('.cs-tabpane').forEach(p => {
+    p.classList.toggle('on', p.id === 'tab-' + which);
+  });
+}
+
+// ============ TYPING RENDER ============
+function typeInto(el, text, speed, done) {
+  el.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'cs-cursor';
+  el.appendChild(cursor);
+  let i = 0;
+  const int = setInterval(() => {
+    if (i >= text.length) {
+      clearInterval(int);
+      cursor.remove();
+      if (done) done();
+      return;
+    }
+    cursor.remove();
+    el.textContent += text[i];
+    el.appendChild(cursor);
+    i++;
+  }, speed);
+}
+
+function renderListing() {
+  const titleEl = document.getElementById('out-title');
+  const shortEl = document.getElementById('out-short');
+  const fullEl = document.getElementById('out-full');
+
+  fullEl.innerHTML = '';
+  shortEl.textContent = '';
+  titleEl.textContent = '';
+
+  typeInto(titleEl, LISTING.title, 14, () => {
+    typeInto(shortEl, LISTING.short, 8, () => {
+      // full desc appears instantly after short typing (otherwise too slow)
+      LISTING.full.forEach(p => {
+        const pEl = document.createElement('p');
+        pEl.textContent = p;
+        pEl.style.opacity = 0;
+        pEl.style.transition = 'opacity 0.4s ease';
+        fullEl.appendChild(pEl);
+      });
+      // fade paragraphs in sequentially
+      const paras = fullEl.querySelectorAll('p');
+      paras.forEach((p, idx) => {
+        setTimeout(() => { p.style.opacity = 1; }, 150 * idx);
+      });
+    });
+  });
+}
+
+function renderCalendar() {
+  const feed = document.getElementById('igFeed');
+  feed.innerHTML = '';
+
+  POSTS.forEach((post, idx) => {
+    const card = document.createElement('div');
+    card.className = 'cs-post';
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(12px)';
+    card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+
+    card.innerHTML = `
+      <div class="cs-ph">
+        <div class="cs-phl">
+          <div class="cs-pavatar">Z</div>
+          <div class="cs-pname">zojak.coffee</div>
+        </div>
+        <div class="cs-pday">${post.day} · ${post.theme}</div>
+      </div>
+      <div class="cs-pimg">
+        <img src="${post.img}" alt="${post.theme}" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;cs-pimg-placeholder&quot;>${post.theme}<br>image</div>'">
+      </div>
+      <div class="cs-pbody">
+        <div class="cs-ptype">${post.theme}</div>
+        <div class="cs-pcap">${post.caption}</div>
+        <div class="cs-pcta"><strong>CTA</strong>${post.cta}</div>
+        <div class="cs-ptags">${post.tags}</div>
+      </div>
+    `;
+    feed.appendChild(card);
+
+    setTimeout(() => {
+      card.style.opacity = 1;
+      card.style.transform = 'translateY(0)';
+    }, 80 * idx);
+  });
+}
+</script>
+
+</body>
+</html>
