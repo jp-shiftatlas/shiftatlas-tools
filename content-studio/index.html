@@ -518,6 +518,7 @@ function switchTab(which) {
     const overlay = document.getElementById('reelOverlay');
     if (v && !v.paused) {
       v.pause();
+      v.muted = true;
       if (overlay) overlay.classList.remove('playing');
     }
   }
@@ -528,6 +529,7 @@ function toggleReel() {
   const overlay = document.getElementById('reelOverlay');
   if (!v) return;
   if (v.paused) {
+    v.muted = false;
     v.play();
     overlay.classList.add('playing');
   } else {
