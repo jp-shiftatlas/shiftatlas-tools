@@ -22,11 +22,11 @@ A 4-minute self-assessment that maps where an operation is leaking time, where A
 
 ## AI Content Studio
 
-Product info in, publish-ready listing and on-brand Instagram posts out. Built on Claude with persistent brand memory for a Philippine specialty coffee brand — product catalog, editorial voice, and visual direction, all consistent without a content team in the loop.
+Product info in, publish-ready listing, on-brand Instagram posts, and reel concepts with full production blueprints — voice, visuals, frame-by-frame direction, all consistent. Built on Claude with persistent brand memory for a Philippine specialty coffee brand, running without a content team in the loop.
 
-**Built with:** Claude · Cowork memory · Nanobanana · Prompt chain · Brand voice encoding
+**Built with:** Claude · Cowork memory · Nanobanana · Video prompt chains · Brand voice encoding
 
-**Useful for:** E-commerce product launches · SMB content pipelines · Founder-led brands without a content team · SOP-driven creative workflows
+**Useful for:** E-commerce product launches · SMB content pipelines · Founder-led brands without a content team · Reel and short-form video systems
 
 **[Open demo →](https://jp-shiftatlas.github.io/shiftatlas-tools/content-studio/)**
 
