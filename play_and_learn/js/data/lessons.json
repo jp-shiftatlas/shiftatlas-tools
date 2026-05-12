@@ -1,0 +1,29 @@
+[
+  {
+    "id": "writing.trace.A",
+    "island": "writing",
+    "order": 1,
+    "gameType": "trace-letter",
+    "params": { "letter": "A" },
+    "narrationKey": "trace-letter-a",
+    "rewards": { "coins": 15 }
+  },
+  {
+    "id": "speaking.repeat.cat",
+    "island": "speaking",
+    "order": 1,
+    "gameType": "repeat-word",
+    "params": { "wordId": "cat" },
+    "narrationKey": "repeat-cat",
+    "rewards": { "coins": 15 }
+  },
+  {
+    "id": "listening.tap.duck",
+    "island": "listening",
+    "order": 1,
+    "gameType": "tap-the-thing",
+    "params": { "targetWordId": "duck", "options": ["cat", "duck", "dog", "rabbit"] },
+    "narrationKey": "tap-duck",
+    "rewards": { "coins": 15 }
+  }
+]

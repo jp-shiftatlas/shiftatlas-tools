@@ -1,0 +1,12 @@
+{
+  "cat": { "text": "cat", "image": "assets/images/words/cat.svg", "audio": "assets/audio/words/cat.mp3" },
+  "dog": { "text": "dog", "image": "assets/images/words/dog.svg", "audio": "assets/audio/words/dog.mp3" },
+  "duck": { "text": "duck", "image": "assets/images/words/duck.svg", "audio": "assets/audio/words/duck.mp3" },
+  "rabbit": { "text": "rabbit", "image": "assets/images/words/rabbit.svg", "audio": "assets/audio/words/rabbit.mp3" },
+  "apple": { "text": "apple", "image": "assets/images/words/apple.svg", "audio": "assets/audio/words/apple.mp3" },
+  "ball": { "text": "ball", "image": "assets/images/words/ball.svg", "audio": "assets/audio/words/ball.mp3" },
+  "fish": { "text": "fish", "image": "assets/images/words/fish.svg", "audio": "assets/audio/words/fish.mp3" },
+  "bird": { "text": "bird", "image": "assets/images/words/bird.svg", "audio": "assets/audio/words/bird.mp3" },
+  "sun": { "text": "sun", "image": "assets/images/words/sun.svg", "audio": "assets/audio/words/sun.mp3" },
+  "moon": { "text": "moon", "image": "assets/images/words/moon.svg", "audio": "assets/audio/words/moon.mp3" }
+}

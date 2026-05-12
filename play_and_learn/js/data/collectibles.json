@@ -1,0 +1,12 @@
+[
+  { "id": "crocco-pasta", "name": "Crocco-Pasta", "emoji": "🐊", "category": "pet", "rarity": "common", "price": { "currency": "coins", "amount": 50 } },
+  { "id": "sneaker-shark", "name": "Sneaker-Shark", "emoji": "🦈", "category": "pet", "rarity": "common", "price": { "currency": "coins", "amount": 75 } },
+  { "id": "banana-hat", "name": "Banana-Hat", "emoji": "🍌", "category": "hat", "rarity": "common", "price": { "currency": "coins", "amount": 60 } },
+  { "id": "tako-trumpeto", "name": "Tako-Trumpeto", "emoji": "🐙", "category": "pet", "rarity": "rare", "price": { "currency": "coins", "amount": 120 } },
+  { "id": "banana-knight", "name": "Banana-Knight", "emoji": "⚔️", "category": "accessory", "rarity": "rare", "price": { "currency": "coins", "amount": 150 } },
+  { "id": "cool-shades", "name": "Cool Shades", "emoji": "😎", "category": "accessory", "rarity": "rare", "price": { "currency": "coins", "amount": 100 } },
+  { "id": "giraffalini", "name": "Giraffalini", "emoji": "🦒", "category": "pet", "rarity": "epic", "price": { "currency": "coins", "amount": 250 } },
+  { "id": "pickle-wizard", "name": "Pickle-Wizard", "emoji": "🥒", "category": "hat", "rarity": "epic", "price": { "currency": "coins", "amount": 300 } },
+  { "id": "dino-espresso", "name": "Dino-Espresso", "emoji": "🦖", "category": "pet", "rarity": "legendary", "price": { "currency": "gems", "amount": 5 } },
+  { "id": "mythic-crown", "name": "Mythic Crown", "emoji": "👑", "category": "hat", "rarity": "mythic", "price": { "currency": "gems", "amount": 25 } }
+]
