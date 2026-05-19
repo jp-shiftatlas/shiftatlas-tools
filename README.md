@@ -39,6 +39,6 @@ Independent AI and operations consulting practice. Engineer first. Executive sec
 Diagnose → Design → Deliver.
 
 - **Site:** [shiftatlas.tech](https://shiftatlas.tech)
-- **Email:** jp@shiftatlas.tech
+- **Email:** connect@shiftatlas.tech
 - **Book a call:** [calendly.com/jp-shiftatlas/20min](https://calendly.com/jp-shiftatlas/20min)
 - **LinkedIn:** [linkedin.com/in/john-paul-reyes-aiops](https://linkedin.com/in/john-paul-reyes-aiops)
