@@ -32,6 +32,19 @@ Product info in, publish-ready listing, on-brand Instagram posts, and reel conce
 
 ---
 
+## KYC Tier Decisioning
+
+A three-pass AI reasoning pipeline for bank customer KYC tier assignment, designed for Philippine BFSI. Walk through pre-generated case studies showing how the pipeline reasons against a 25-rule CDD ruleset anchored in MORB §921/§923, BSP Circular 1230, and NPC Advisory 2024-04 — including independent audit, targeted self-correction, and analyst override controls.
+
+This is a methodology demonstration, not a product. It shows the architectural pattern Shift Atlas would deploy as a consulting engagement on a bank's own AWS infrastructure.
+
+**Built with:** Next.js · Vercel serverless · Anthropic API (Claude Sonnet 4.6) · Zod schemas · Upstash Redis (cost protection) · Playwright e2e
+**Useful for:** BFSI compliance officers evaluating AI augmentation patterns · Bank ops leaders scoping CDD policy automation · Discovery-call architecture conversations
+
+[Open demo →](https://kyc.shiftatlas.tech/) · [View source →](https://github.com/jp-shiftatlas/kyc-tier-decisioning)
+
+---
+
 ## About Shift Atlas
 
 Independent AI and operations consulting practice. Engineer first. Executive second.
