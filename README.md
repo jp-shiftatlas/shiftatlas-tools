@@ -4,7 +4,7 @@ Live demos of AI-powered operating tools built by [Shift Atlas](https://shiftatl
 
 Working prototypes of the systems I build for clients. Each one started as a real problem, became a real deliverable, and lives here as a transparent demo of what an AI-powered workflow actually looks like.
 
-**→ [View the demos](https://jp-shiftatlas.github.io/shiftatlas-tools/)**
+**[View the demos →](https://jp-shiftatlas.github.io/shiftatlas-tools/)**
 
 ---
 
@@ -41,7 +41,8 @@ This is a methodology demonstration, not a product. It shows the architectural p
 **Built with:** Next.js · Vercel serverless · Anthropic API (Claude Sonnet 4.6) · Zod schemas · Upstash Redis (cost protection) · Playwright e2e
 **Useful for:** BFSI compliance officers evaluating AI augmentation patterns · Bank ops leaders scoping CDD policy automation · Discovery-call architecture conversations
 
-[Open demo →](https://kyc.shiftatlas.tech/) · [View source →](https://github.com/jp-shiftatlas/kyc-tier-decisioning)
+[Open demo →](https://kyc.shiftatlas.tech/)
+[View source →](https://github.com/jp-shiftatlas/kyc-tier-decisioning)
 
 ---
 
